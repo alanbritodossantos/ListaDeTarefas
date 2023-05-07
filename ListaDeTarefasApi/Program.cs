@@ -1,4 +1,3 @@
-
 using ListaDeTarefasApi.Data;
 using ListaDeTarefasApi.Repositorios;
 using ListaDeTarefasApi.Repositorios.Interfaces;
@@ -19,6 +18,8 @@ namespace ListaDeTarefasApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Register CORS service
+            builder.Services.AddCors();
 
             builder.Services.AddEntityFrameworkSqlServer()
        .AddDbContext<ListaDeTarefasContext>(
@@ -36,10 +37,16 @@ namespace ListaDeTarefasApi
                 app.UseSwaggerUI();
             }
 
+            // Add CORS middleware
+            app.UseCors(builder => builder
+                .WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

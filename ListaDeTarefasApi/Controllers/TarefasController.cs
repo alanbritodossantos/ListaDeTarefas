@@ -22,7 +22,9 @@ namespace ListaDeTarefasApi.Controllers
 
         // GET: api/Tarefas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tarefa>>> GetTarefas(string titulo, bool? finalizada)
+        //public async Task<ActionResult<IEnumerable<Tarefa>>> GetTarefas(string titulo, bool? finalizada)
+        public async Task<ActionResult<IEnumerable<Tarefa>>> GetTarefas(string titulo = "", bool? finalizada = null)
+
         {
             var tarefas = _context.Tarefas.AsQueryable();
 
